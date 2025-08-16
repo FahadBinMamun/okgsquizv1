@@ -46,7 +46,7 @@
         <div class="flex items-center gap-4">
             <img id="schoolLogo" src="https://i.postimg.cc/sDgPX0zb/school-logo.png" alt="School Logo" class="h-12 w-12">
             <div>
-                <h1 id="portalTitleNav" class="text-lg md:text-2xl title-font text-[var(--accent)] font-bold">ওমর কিন্ডারগার্টেন এন্ড ওমর গার্ডেন একাডেমী</h1>
+                <h1 id="portalTitleNav" class="text-lg md:text-2xl title-font text-[var(--accent)] font-bold">ওমর কিন্ডারগার্টেন এন্ড ওমর গার্টেন একাডেমী</h1>
                 <p id="portalAnnouncement" class="text-xs md:text-base mt-1 text-[var(--text-secondary)]">আয়োজনে: এসোসিয়েশন অফ লিটল প্রোগ্রামার্স এন্ড কম্পিউটার গিক্স (ALPCG)</p>
             </div>
         </div>
@@ -332,9 +332,9 @@
             ]);
             if (contentResult) {
                 websiteSettings = contentResult.data;
-                allDOMElements.portalTitleNav.textContent = websiteSettings.portaltitle || 'ওমর কিন্ডারগার্টেন ও ওমর গার্ডেন একাডেমী';
+                allDOMElements.portalTitleNav.textContent = websiteSettings.portaltitle || 'ওমর কিন্ডারগার্টেন এন্ড ওমর গার্টেন একাডেমী';
                 allDOMElements.portalAnnouncement.textContent = websiteSettings.portalannouncement || 'আয়োজনে: এসোসিয়েশন অফ লিটল প্রোগ্রামার্স এন্ড কম্পিউটার গিক্স (ALPCG)';
-                document.title = websiteSettings.portaltitle || 'ওমর কিন্ডারগার্টেন স্কুল ও ওমর গার্ডেন একাডেমী - কুইজ পোর্টাল';
+                document.title = websiteSettings.portaltitle || 'ওমর কিন্ডারগার্টেন স্কুল এন্ড ওমর গার্টেন একাডেমী - কুইজ পোর্টাল';
                 allDOMElements.loginPageMessage.textContent = websiteSettings.loginpagemessage || 'আপনার আইডি এবং পিন ব্যবহার করে লগইন করুন।';
                 allDOMElements.dashboardWelcomeMessage.textContent = websiteSettings.dashboardwelcomemessage || 'নিচের তালিকা থেকে আপনার পছন্দের কুইজটি শুরু করুন।';
                 
@@ -1319,4 +1319,5 @@
     </script>
 </body>
 </html>
+
 
