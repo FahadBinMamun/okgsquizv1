@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="bn" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Web App Manifest for Installable PWA -->
+    <link rel="manifest" href="data:application/manifest+json,{
+        &quot;name&quot;: &quot;ওমর কিন্ডারগার্টেন স্কুল - কুইজ পোর্টাল&quot;,
+        &quot;short_name&quot;: &quot;কুইজ পোর্টাল&quot;,
+        &quot;start_url&quot;: &quot;.&quot;,
+        &quot;display&quot;: &quot;standalone&quot;,
+        &quot;background_color&quot;: &quot;#FFFFFF&quot;,
+        &quot;theme_color&quot;: &quot;#3b82f6&quot;,
+        &quot;description&quot;: &quot;ওমর কিন্ডারগার্টেন স্কুল এন্ড ওমর গার্টেন একাডেমীর জন্য একটি অনলাইন কুইজ পোর্টাল।&quot;,
+        &quot;icons&quot;: [
+            { &quot;src&quot;: &quot;https://placehold.co/192x192/3b82f6/FFFFFF?text=Q&quot;, &quot;sizes&quot;: &quot;192x192&quot;, &quot;type&quot;: &quot;image/png&quot; },
+            { &quot;src&quot;: &quot;https://placehold.co/512x512/3b82f6/FFFFFF?text=Q&quot;, &quot;sizes&quot;: &quot;512x512&quot;, &quot;type&quot;: &quot;image/png&quot; }
+        ]
+    }">
+    
+    <!-- Meta tags for PWA -->
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="কুইজ পোর্টাল">
+
+    <title>ওমর কিন্ডারগার্টেন স্কুল এন্ড ওমর গার্টেন একাডেমী - কুইজ পোর্টাল</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Tiro+Bangla:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body class="antialiased">
+
+    <div id="loader" class="loader-backdrop" style="display: none;"><div class="loader"></div></div>
+
+    <header class="py-4 px-6 flex justify-between items-center border-b border-[var(--border)] bg-[var(--foreground)] sticky top-0 z-30 shadow-md">
+        <div class="flex items-center gap-4">
+            <!-- Hamburger Menu for mobile admin view -->
+            <button id="hamburgerMenu" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <img id="schoolLogo" src="https://i.postimg.cc/sDgPX0zb/school-logo.png" alt="School Logo" class="h-12 w-12">
+            <div>
+                <h1 id="portalTitleNav" class="text-lg md:text-2xl title-font text-[var(--accent)] font-bold">ওমর কিন্ডারগার্টেন এন্ড ওমর গার্টেন একাডেমী</h1>
+                <p id="portalAnnouncement" class="text-xs md:text-base mt-1 text-[var(--text-secondary)]">আয়োজনে: এসোসিয়েশন অফ লিটল প্রোগ্রামার্স এন্ড কম্পিউটার গিক্স (ALPCG)</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4">
+            <div class="theme-switch-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" />
+                    <div class="slider round"></div>
+                </label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </div>
+            <span id="userGreeting" class="text-slate-600 font-bold mr-2 hidden md:inline-block"></span>
+            <button id="logoutButton" class="action-button !w-auto !text-sm !py-2 !px-4 hidden !bg-red-500 hover:!bg-red-600">লগআউট</button>
+            <button id="adminLoginButton" class="action-button !w-auto !text-sm !py-2 !px-4 !bg-amber-500 hover:!bg-amber-600">অ্যাডমিন</button>
+        </div>
+    </header>
+
+    <main class="min-h-screen">
+        <!-- Student Views -->
+        <div id="studentLoginView" class="view container max-w-lg mx-auto p-4 mt-12"><div class="card login-card"><h2 class="text-3xl font-bold mb-2 title-font text-center">কুইজে অংশগ্রহণ করুন</h2><p id="loginPageMessage" class="text-center text-[var(--text-secondary)] mb-6"></p><form id="studentLoginForm"><select id="studentClass" class="input-field" required><option value="">আপনার শ্রেণী নির্বাচন করুন</option></select><input type="number" id="studentRoll" class="input-field" placeholder="অংশগ্রহণকারী আইডি (রোল)" required><input type="password" id="studentPin" class="input-field" placeholder="প্রবেশ কোড (পিন)" required><button type="submit" class="action-button mt-2">কুইজ শুরু করুন</button><p id="loginError" class="text-red-500 mt-4 hidden text-center font-bold"></p></form></div></div>
+        
+        <div id="studentDashboardView" class="view container max-w-6xl mx-auto p-4 mt-8">
+            <div class="flex border-b border-[var(--border)] mb-6">
+                <button id="activeQuizzesTabBtn" class="tab-button active">সক্রিয় কুইজ</button>
+                <button id="myResultsTabBtn" class="tab-button">আমার ফলাফল</button>
+            </div>
+            <div id="studentDashboardContent">
+                <div id="activeQuizzesContent">
+                    <h2 class="text-4xl title-font text-center mb-2">সক্রিয় কুইজসমূহ</h2>
+                    <p id="dashboardWelcomeMessage" class="text-center text-[var(--text-secondary)] mb-8"></p>
+                    <div id="activeQuizzesList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                </div>
+                <div id="myResultsContent" class="hidden">
+                    <h2 class="text-4xl title-font text-center mb-8">আমার ফলাফল</h2>
+                    <div id="myResultsList" class="table-wrapper"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quizView" class="view container max-w-3xl mx-auto p-4 mt-8"><div class="card"><div class="flex justify-between items-center mb-4 font-bold"><p>Score: <span id="currentScore" class="title-font text-2xl text-[var(--accent)]">0</span></p><p>Question <span id="questionNumber">1</span>/<span id="totalQuestions">0</span></p><span id="quizTimer" class="title-font text-2xl text-[var(--accent)]">00:00</span></div><div class="h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700 mb-6"><div id="progressBar" class="bg-[var(--accent)] h-2.5 rounded-full" style="width: 100%; transition: all 0.5s;"></div></div><h2 id="questionText" class="text-2xl font-bold mb-6 leading-tight">প্রশ্ন লোড হচ্ছে...</h2><div id="optionsContainer" class="space-y-3"></div><div class="mt-8 flex justify-between"><button id="prevQuestionBtn" class="action-button !w-auto !bg-slate-500 hover:!bg-slate-600">পূর্ববর্তী</button><button id="nextQuestionBtn" class="action-button !w-auto">পরবর্তী</button><button id="submitQuizBtn" class="action-button !w-auto hidden !bg-green-500 hover:!bg-green-600">জমা দিন</button></div></div></div>
+        <div id="resultView" class="view container max-w-2xl mx-auto p-4 mt-8"><div class="card text-center"><h2 class="text-5xl title-font mb-4 text-[var(--accent)]">কুইজ সম্পন্ন!</h2><p class="text-3xl font-bold my-4">আপনার স্কোর: <span id="finalScore">0</span> / <span id="finalTotal">0</span></p><div class="max-w-md mx-auto my-6"><canvas id="resultChartCanvas"></canvas></div><div class="flex gap-4 mt-6"><button id="reviewAnswersBtn" class="action-button !bg-indigo-500 hover:!bg-indigo-600">উত্তর পর্যালোচনা</button><button id="backToDashboardBtn" class="action-button">ড্যাশবোর্ডে ফিরে যান</button></div></div></div>
+
+        <!-- Admin View -->
+        <div id="adminDashboardView" class="view">
+            <div class="admin-layout">
+                <aside id="adminSidebar" class="admin-sidebar">
+                    <h2 class="text-2xl font-bold title-font mb-8">অ্যাডমিন প্যানেল</h2>
+                    <nav class="flex flex-col gap-2">
+                        <a href="#" data-tab="dashboard" class="sidebar-link active"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>ড্যাশবোর্ড</a>
+                        <a href="#" data-tab="manage-quizzes" class="sidebar-link"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>কুইজসমূহ</a>
+                        <a href="#" data-tab="manage-participants" class="sidebar-link"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>অংশগ্রহণকারী</a>
+                        <a href="#" data-tab="manage-clubs" class="sidebar-link"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A8 8 0 0117.657 18.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1014.12 11.88l-4.242 4.242z"></path></svg>ক্লাবসমূহ</a>
+                        <a href="#" data-tab="view-results" class="sidebar-link"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>ফলাফল</a>
+                        <a href="#" data-tab="manage-admins" class="sidebar-link" data-role="SuperAdmin"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197M4 7a4 4 0 118 0 4 4 0 01-8 0z"></path></svg>অ্যাডমিন ম্যানেজমেন্ট</a>
+                        <a href="#" data-tab="activity-log" class="sidebar-link" data-role="SuperAdmin"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>অ্যাক্টিভিটি লগ</a>
+                        <a href="#" data-tab="website-settings" class="sidebar-link" data-role="SuperAdmin"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>সেটিংস</a>
+                    </nav>
+                </aside>
+
+                <div class="admin-main-content">
+                    <div id="tab-dashboard" class="admin-tab-content"></div>
+                    <div id="tab-manage-quizzes" class="admin-tab-content hidden"></div>
+                    <div id="tab-manage-participants" class="admin-tab-content hidden"></div>
+                    <div id="tab-manage-clubs" class="admin-tab-content hidden"></div>
+                    <div id="tab-view-results" class="admin-tab-content hidden"></div>
+                    <div id="tab-manage-admins" class="admin-tab-content hidden" data-role="SuperAdmin"></div>
+                    <div id="tab-activity-log" class="admin-tab-content hidden" data-role="SuperAdmin"></div>
+                    <div id="tab-website-settings" class="admin-tab-content hidden" data-role="SuperAdmin"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3 class="text-lg font-bold">ওমর কিন্ডারগার্টেন স্কুল এন্ড ওমর গার্টেন একাডেমী</h3>
+                <p class="text-sm">তত্ত্বাবধানে: Fahad Bin Mamun, President, ALPCG</p>
+                <p class="copyright">&copy; 2024 Omar Kindergarten School & Omar Garten Academy. All Rights Reserved.</p>
+            </div>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+                <a href="#" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
+                <a href="#" aria-label="Website"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10zm-1-10.665c0-.368.123-.629.351-.817.23-.189.525-.29.87-.29.351 0 .643.098.882.292.239.194.364.453.364.815v1.33c0 .363-.124.624-.363.812-.23.189-.524.288-.883.288-.345 0-.639-.099-.87-.288-.228-.188-.351-.449-.351-.812v-1.33zm1 2.665c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3-1.346 3-3 3zm5.418-2.106c-.148-.046-.302-.07-.458-.07-.417 0-.75.336-.75.75s.333.75.75.75c.157 0 .311-.024.458-.07.828 1.113 1.332 2.41 1.332 3.846 0 2.206-1.794 4-4 4s-4-1.794-4-4c0-1.436.504-2.733 1.332-3.846.147.046.301.07.458.07.417 0 .75-.336.75-.75s-.333-.75-.75-.75c-.157 0-.311.024-.458.07-1.042 1.255-1.742 2.8-1.742 4.536 0 3.309 2.691 6 6 6s6-2.691 6-6c0-1.736-.7-3.281-1.742-4.536z"/></svg></a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Modals -->
+    <div id="confirmationModal" class="modal-backdrop hidden"><div class="modal-content w-11/12 max-w-md relative custom-modal"><h2 id="confirmationTitle" class="text-2xl font-bold mb-4 title-font">Are you sure?</h2><p id="confirmationMessage"></p><div class="modal-actions"><button id="confirmCancelBtn" class="action-button !bg-slate-500">Cancel</button><button id="confirmOkBtn" class="action-button !bg-red-500">Confirm</button></div></div></div>
+    <div id="adminLoginModal" class="modal-backdrop hidden"><div class="modal-content w-11/12 max-w-md relative"><h2 class="text-3xl font-bold mb-4 title-font">Admin Access</h2><form id="adminLoginForm"><input type="text" id="adminId" class="input-field" placeholder="Enter Admin ID" required><input type="password" id="adminPassword" class="input-field" placeholder="Enter Admin Password" required><button type="submit" class="action-button mt-2">Login</button><p id="adminLoginError" class="text-red-500 mt-4 hidden text-center font-bold"></p></form><button id="closeAdminModal" class="absolute top-4 right-4 text-2xl font-bold text-slate-500 hover:text-red-500">&times;</button></div></div>
+    <div id="clubModal" class="modal-backdrop hidden"><div class="modal-content w-11/12 max-w-lg relative"><h2 id="clubModalTitle" class="text-3xl font-bold mb-4 title-font">Add Club</h2><form id="clubForm"><input type="hidden" id="clubId"><input type="text" id="clubName" class="input-field" placeholder="Club Name" required><input type="text" id="clubLogo" class="input-field" placeholder="Club Logo URL" required><div class="flex gap-4 mt-4"><button type="button" id="closeClubModalBtn" class="action-button !bg-slate-500">Cancel</button><button type="submit" class="action-button">Save Club</button></div></form></div></div>
+    <div id="participantModal" class="modal-backdrop hidden"><div class="modal-content w-11/12 max-w-lg relative"><h2 id="participantModalTitle" class="text-3xl font-bold mb-4 title-font">Add Participant</h2><form id="participantForm"><input type="hidden" id="originalRoll"><select id="participantClass" class="input-field" required><option value="">Select Class</option></select><input type="number" id="participantRoll" class="input-field" placeholder="Roll" required><input type="text" id="participantName" class="input-field" placeholder="Name" required><input type="text" id="participantPin" class="input-field" placeholder="PIN" required><div class="flex gap-4 mt-4"><button type="button" id="closeParticipantModalBtn" class="action-button !bg-slate-500">Cancel</button><button type="submit" class="action-button">Save Participant</button></div></form></div></div>
+    <div id="quizEditModal" class="modal-backdrop hidden"><div class="modal-content w-11/12 max-w-4xl relative"><h2 id="quizEditModalTitle" class="text-3xl font-bold mb-4 title-font">Edit Quiz</h2><form id="quizEditForm" class="space-y-6"></form><button id="closeQuizEditModal" class="absolute top-4 right-4 text-2xl font-bold text-slate-500 hover:text-red-500">&times;</button></div></div>
+    <div id="quizAnalysisModal" class="modal-backdrop hidden"><div class="modal-content w-11/12 max-w-5xl relative"><h2 id="quizAnalysisTitle" class="text-3xl font-bold mb-4 title-font">Quiz Analysis</h2><div id="quizAnalysisContent"></div><button id="closeQuizAnalysisModal" class="absolute top-4 right-4 text-2xl font-bold text-slate-500 hover:text-red-500">&times;</button></div></div>
+    <div id="answerReviewModal" class="modal-backdrop hidden"><div class="modal-content w-11/12 max-w-3xl relative"><h2 id="answerReviewTitle" class="text-3xl font-bold mb-4 title-font">Answer Review</h2><div id="answerReviewContent" class="space-y-4"></div><button id="closeAnswerReviewModal" class="absolute top-4 right-4 text-2xl font-bold text-slate-500 hover:text-red-500">&times;</button></div></div>
+    <div id="adminModal" class="modal-backdrop hidden"><div class="modal-content w-11/12 max-w-lg relative"><h2 id="adminModalTitle" class="text-3xl font-bold mb-4 title-font">Add Admin</h2><form id="adminForm"><input type="hidden" id="originalAdminId"><input type="text" id="formAdminId" class="input-field" placeholder="Admin ID (e.g., teacher01)" required><input type="text" id="formAdminName" class="input-field" placeholder="Full Name" required><input type="password" id="formAdminPassword" class="input-field" placeholder="Password (leave blank to keep unchanged)"><select id="formAdminRole" class="input-field" required><option value="Teacher">Teacher</option><option value="SuperAdmin">SuperAdmin</option></select><input type="text" id="formAdminClasses" class="input-field" placeholder="Assigned Classes (comma-separated, e.g., Class 6,Class 7)"><div class="flex gap-4 mt-4"><button type="button" id="closeAdminModalBtn" class="action-button !bg-slate-500">Cancel</button><button type="submit" class="action-button">Save Admin</button></div></form></div></div>
+
+    <script>
+        // --- SERVICE WORKER FOR PWA ---
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register(
+                URL.createObjectURL(new Blob([`
+                    const CACHE_NAME = 'quiz-portal-cache-v1';
+                    self.addEventListener('install', event => { event.waitUntil(caches.open(CACHE_NAME)); });
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request).then(response => response || fetch(event.request))
+                        );
+                    });
+                `], { type: 'application/javascript' }))
+            ).then(reg => console.log('ServiceWorker registration successful.', reg))
+             .catch(err => console.log('ServiceWorker registration failed: ', err));
+        }
+        
+        // --- CONFIGURATION ---
+        const API_URL = "https://script.google.com/macros/s/AKfycbyFxRRQl7tsRhyrTforII6g0hoQePBKm9IsQSLoFmtbwxFiKdsl4AVvsMWFeb7BwvA/exec"; 
+
+        // --- GLOBAL STATE ---
+        let currentQuizData = {}, currentQuestionIndex = 0, userAnswers = {}, quizTimerInterval, resultChart, lastResultId, websiteSettings = {};
+        let adminDashboardCache = {};
+        let quizInProgress = false;
+        let adminCharts = {};
+
+        // --- DOM ELEMENTS ---
+        const allDOMElements = {};
+        [
+            'loader', 'portalTitleNav', 'portalAnnouncement', 'userGreeting', 'logoutButton', 'adminLoginButton', 'theme-toggle', 'hamburgerMenu',
+            'studentLoginView', 'studentLoginForm', 'studentClass', 'studentRoll', 'studentPin', 'loginError', 
+            'studentDashboardView', 'activeQuizzesList', 'myResultsList', 'activeQuizzesTabBtn', 'myResultsTabBtn', 'activeQuizzesContent', 'myResultsContent',
+            'quizView', 'currentScore', 'questionNumber', 'totalQuestions', 'quizTimer', 'progressBar', 'questionText', 'optionsContainer', 'prevQuestionBtn', 'nextQuestionBtn', 'submitQuizBtn', 
+            'resultView', 'finalScore', 'finalTotal', 'resultChartCanvas', 'reviewAnswersBtn', 'backToDashboardBtn', 
+            'adminDashboardView', 'adminSidebar', 'adminLoginModal', 'adminLoginForm', 'adminId', 'adminPassword', 'adminLoginError', 'closeAdminModal', 
+            'clubModal', 'clubModalTitle', 'clubForm', 'clubId', 'clubName', 'clubLogo', 'closeClubModalBtn', 
+            'participantModal', 'participantModalTitle', 'participantForm', 'originalRoll', 'participantClass', 'participantRoll', 'participantName', 'participantPin', 'closeParticipantModalBtn', 
+            'quizEditModal', 'quizEditModalTitle', 'quizEditForm', 'closeQuizEditModal', 
+            'quizAnalysisModal', 'quizAnalysisTitle', 'quizAnalysisContent', 'closeQuizAnalysisModal', 
+            'answerReviewModal', 'answerReviewTitle', 'answerReviewContent', 'closeAnswerReviewModal', 
+            'confirmationModal', 'confirmationTitle', 'confirmationMessage', 'confirmCancelBtn', 'confirmOkBtn', 
+            'loginPageMessage', 'dashboardWelcomeMessage', 'schoolLogo', 
+            'adminModal', 'adminModalTitle', 'adminForm', 'originalAdminId', 'formAdminId', 'formAdminName', 'formAdminPassword', 'formAdminRole', 'formAdminClasses', 'closeAdminModalBtn'
+        ].forEach(id => {
+            allDOMElements[id] = document.getElementById(id);
+        });
+
+        // --- API HELPER ---
+        async function callApi(action, payload = {}) {
+            allDOMElements.loader.style.display = 'flex';
+            try {
+                if (!API_URL || API_URL.includes("PASTE_YOUR_NEW_WEB_APP_URL_HERE")) {
+                    throw new Error("API URL is not set. Please deploy your Apps Script and paste the new URL in the API_URL variable.");
+                }
+                const adminInfo = JSON.parse(sessionStorage.getItem('userData'));
+                const userType = sessionStorage.getItem('userType');
+                const body = { action, payload };
+                if (userType === 'admin' && adminInfo) {
+                    body.adminInfo = { id: adminInfo.id, name: adminInfo.name, role: adminInfo.role };
+                }
+
+                const response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(body), redirect: 'follow', headers: {'Content-Type': 'text/plain;charset=utf-8'} });
+                
+                if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+                const result = await response.json();
+                if (result.result === 'error') throw new Error(result.message || 'An unknown API error occurred.');
+                return result;
+            } catch (error) {
+                console.error('API Call Failed:', error);
+                let errorMessage = error.message;
+                if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+                    errorMessage = "Could not connect to the server. Please check your internet connection and ensure the API URL is correct and the Apps Script is deployed correctly with public access.";
+                }
+                showConfirmationModal({ title: 'Error', message: errorMessage, okText: 'OK', cancelable: false });
+                return null;
+            } finally {
+                allDOMElements.loader.style.display = 'none';
+            }
+        }
+
+        // --- CUSTOM MODAL ---
+        function showConfirmationModal({ title, message, okText = 'Confirm', cancelText = 'Cancel', onConfirm, onCancel, cancelable = true }) {
+            allDOMElements.confirmationTitle.textContent = title;
+            allDOMElements.confirmationMessage.textContent = message;
+            allDOMElements.confirmOkBtn.textContent = okText;
+            allDOMElements.confirmCancelBtn.textContent = cancelText;
+            allDOMElements.confirmCancelBtn.style.display = cancelable ? 'block' : 'none';
+            allDOMElements.confirmationModal.classList.remove('hidden');
+
+            const okHandler = () => {
+                allDOMElements.confirmationModal.classList.add('hidden');
+                if (onConfirm) onConfirm();
+                cleanup();
+            };
+            const cancelHandler = () => {
+                allDOMElements.confirmationModal.classList.add('hidden');
+                if (onCancel) onCancel();
+                cleanup();
+            };
+            const cleanup = () => {
+                allDOMElements.confirmOkBtn.removeEventListener('click', okHandler);
+                allDOMElements.confirmCancelBtn.removeEventListener('click', cancelHandler);
+            };
+
+            allDOMElements.confirmOkBtn.addEventListener('click', okHandler, { once: true });
+            allDOMElements.confirmCancelBtn.addEventListener('click', cancelHandler, { once: true });
+        }
+
+        // --- VIEW MANAGEMENT ---
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(view => view.style.display = 'none');
+            allDOMElements[viewId].style.display = 'block';
+            allDOMElements.hamburgerMenu.style.display = viewId === 'adminDashboardView' ? 'block' : 'none';
+        }
+
+        // --- AUTH & SESSION ---
+        function checkSession() {
+            const userType = sessionStorage.getItem('userType');
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            
+            loadInitialData().then(() => {
+                if (userType === 'student' && userData) {
+                    allDOMElements.userGreeting.textContent = `স্বাগতম, ${userData.name}`;
+                    [allDOMElements.userGreeting, allDOMElements.logoutButton].forEach(el => el.style.display = 'inline-block');
+                    allDOMElements.adminLoginButton.style.display = 'none';
+                    showView('studentDashboardView');
+                    loadActiveQuizzes();
+                    loadStudentHistory();
+                } else if (userType === 'admin' && userData) {
+                    allDOMElements.userGreeting.textContent = `স্বাগতম, ${userData.name} (${userData.role})`;
+                    [allDOMElements.userGreeting, allDOMElements.logoutButton].forEach(el => el.style.display = 'inline-block');
+                    allDOMElements.adminLoginButton.style.display = 'none';
+                    
+                    document.querySelectorAll('[data-role="SuperAdmin"]').forEach(el => {
+                        el.style.display = userData.role === 'SuperAdmin' ? '' : 'none';
+                    });
+
+                    showView('adminDashboardView');
+                    loadAdminDashboard();
+                } else {
+                    [allDOMElements.userGreeting, allDOMElements.logoutButton].forEach(el => el.style.display = 'none');
+                    allDOMElements.adminLoginButton.style.display = 'inline-block';
+                    showView('studentLoginView');
+                }
+            });
+        }
+        
+        // --- INITIAL DATA LOAD ---
+        async function loadInitialData() {
+            const [contentResult, classesResult] = await Promise.all([
+                callApi('getWebsiteContent'),
+                callApi('getClassList')
+            ]);
+            if (contentResult) {
+                websiteSettings = contentResult.data;
+                allDOMElements.portalTitleNav.textContent = websiteSettings.portaltitle || 'ওমর কিন্ডারগার্টেন ও ওমর গার্ডেন একাডেমী';
+                allDOMElements.portalAnnouncement.textContent = websiteSettings.portalannouncement || 'আয়োজনে: এসোসিয়েশন অফ লিটল প্রোগ্রামার্স এন্ড কম্পিউটার গিক্স (ALPCG)';
+                document.title = websiteSettings.portaltitle || 'ওমর কিন্ডারগার্টেন স্কুল ও ওমর গার্ডেন একাডেমী - কুইজ পোর্টাল';
+                allDOMElements.loginPageMessage.textContent = websiteSettings.loginpagemessage || 'আপনার আইডি এবং পিন ব্যবহার করে লগইন করুন।';
+                allDOMElements.dashboardWelcomeMessage.textContent = websiteSettings.dashboardwelcomemessage || 'নিচের তালিকা থেকে আপনার পছন্দের কুইজটি শুরু করুন।';
+                
+                if (websiteSettings.schoollogourl) {
+                    allDOMElements.schoolLogo.src = websiteSettings.schoollogourl;
+                }
+                
+                document.documentElement.style.setProperty('--accent', websiteSettings.themecolorprimary || '#3b82f6');
+            }
+            if (classesResult) {
+                const classSelects = [allDOMElements.studentClass, allDOMElements.participantClass];
+                classSelects.forEach(select => {
+                    const currentVal = select.value;
+                    select.innerHTML = '<option value="">আপনার শ্রেণী নির্বাচন করুন</option>';
+                    classesResult.data.forEach(className => {
+                        select.innerHTML += `<option value="${className}">${className}</option>`;
+                    });
+                    select.value = currentVal;
+                });
+            }
+        }
+
+        // --- STUDENT: DASHBOARD & QUIZ LOGIC ---
+        async function loadActiveQuizzes() {
+            allDOMElements.activeQuizzesList.innerHTML = '';
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            const result = await callApi('getActiveQuizzes', { className: userData.className, studentRoll: userData.roll });
+            if (result && result.data.length > 0) {
+                result.data.forEach(quiz => {
+                    const quizCard = document.createElement('div');
+                    quizCard.className = 'card !p-0 overflow-hidden';
+                    quizCard.innerHTML = `
+                        <img src="${quiz.clublogourl || 'https://placehold.co/600x400/3b82f6/ffffff?text=' + encodeURIComponent(quiz.clubname)}" class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-2xl title-font">${quiz.quiztitle}</h3>
+                            <p class="font-bold text-[var(--accent)]">${quiz.clubname}</p>
+                            <p class="text-sm text-[var(--text-secondary)]">প্রশ্ন: ${quiz.totalquestions} | সময়: ${quiz.timelimitminutes} মিনিট</p>
+                            <button class="action-button mt-4" ${quiz.isCompleted ? 'disabled' : ''}>${quiz.isCompleted ? 'সম্পন্ন' : 'কুইজ শুরু করুন'}</button>
+                        </div>`;
+                    if (!quiz.isCompleted) {
+                        quizCard.querySelector('button').onclick = () => startQuiz(quiz);
+                    }
+                    allDOMElements.activeQuizzesList.appendChild(quizCard);
+                });
+            } else {
+                allDOMElements.activeQuizzesList.innerHTML = '<p class="text-center text-[var(--text-secondary)] col-span-full">এই মুহূর্তে আপনার ক্লাসের জন্য কোনো সক্রিয় কুইজ নেই।</p>';
+            }
+        }
+
+        async function loadStudentHistory() {
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            const result = await callApi('getStudentHistory', { studentRoll: userData.roll, studentClass: userData.className });
+            const listEl = allDOMElements.myResultsList;
+            if (result && result.data.length > 0) {
+                let table = `<table class="table-auto"><thead><tr><th>কুইজের নাম</th><th>স্কোর</th><th>তারিখ</th><th>কার্যক্রম</th></tr></thead><tbody>`;
+                result.data.forEach(res => {
+                    table += `
+                        <tr>
+                            <td>${res.quizTitle}</td>
+                            <td><span class="font-bold">${res.score} / ${res.totalQuestions}</span></td>
+                            <td>${new Date(res.timestamp).toLocaleString()}</td>
+                            <td><button class="student-review-btn action-button !w-auto !text-xs !py-1 !px-2" data-result-id="${res.resultId}">পর্যালোচনা</button></td>
+                        </tr>
+                    `;
+                });
+                table += `</tbody></table>`;
+                listEl.innerHTML = table;
+            } else {
+                listEl.innerHTML = `<div class="card text-center"><p>আপনি এখনও কোনো কুইজে অংশগ্রহণ করেননি।</p></div>`;
+            }
+        }
+        
+        function resetQuizState() {
+            clearInterval(quizTimerInterval);
+            currentQuizData = {};
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            quizInProgress = false;
+        }
+
+        async function startQuiz(quiz) {
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            const attemptResult = await callApi('checkQuizAttempt', { quizId: quiz.quizid, studentRoll: userData.roll, studentClass: userData.className });
+            if (attemptResult && attemptResult.data.attempted) {
+                showConfirmationModal({ title: 'ইতিমধ্যে সম্পন্ন', message: 'আপনি এই কুইজটি ইতিমধ্যে সম্পন্ন করেছেন।', okText: 'ঠিক আছে', cancelable: false });
+                return;
+            }
+
+            const detailsResult = await callApi('getQuizDetails', { quizId: quiz.quizid });
+            if (detailsResult && detailsResult.data.length > 0) {
+                resetQuizState();
+                
+                let questions = detailsResult.data;
+                questions.sort(() => Math.random() - 0.5); 
+                questions.forEach(q => {
+                    let options = [q.OptionA, q.OptionB, q.OptionC, q.OptionD];
+                    options.sort(() => Math.random() - 0.5);
+                    [q.OptionA, q.OptionB, q.OptionC, q.OptionD] = options;
+                });
+
+                quizInProgress = true;
+                currentQuizData = {
+                    quizId: quiz.quizid,
+                    title: quiz.quiztitle,
+                    timeLimit: quiz.timelimitminutes,
+                    questions: questions 
+                };
+                allDOMElements.totalQuestions.textContent = currentQuizData.questions.length;
+                showView('quizView');
+                renderQuestion();
+                startTimer(currentQuizData.timeLimit * 60);
+            }
+        }
+
+        function renderQuestion() {
+            const question = currentQuizData.questions[currentQuestionIndex];
+            allDOMElements.questionText.textContent = question.QuestionText;
+            allDOMElements.questionNumber.textContent = currentQuestionIndex + 1;
+            allDOMElements.optionsContainer.innerHTML = '';
+            
+            const options = [question.OptionA, question.OptionB, question.OptionC, question.OptionD];
+            options.forEach(optionText => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option-item p-4 border border-[var(--border)] rounded-lg cursor-pointer';
+                optionDiv.textContent = optionText;
+                optionDiv.onclick = () => selectAnswer(question.QuestionID, optionText, optionDiv);
+                if (userAnswers[question.QuestionID] === optionText) {
+                    optionDiv.classList.add('selected-option');
+                }
+                allDOMElements.optionsContainer.appendChild(optionDiv);
+            });
+
+            allDOMElements.prevQuestionBtn.disabled = currentQuestionIndex === 0;
+            allDOMElements.nextQuestionBtn.style.display = currentQuestionIndex === currentQuizData.questions.length - 1 ? 'none' : 'block';
+            allDOMElements.submitQuizBtn.style.display = currentQuestionIndex === currentQuizData.questions.length - 1 ? 'block' : 'none';
+        }
+
+        function selectAnswer(questionId, answer, element) {
+            userAnswers[questionId] = answer;
+            document.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected-option'));
+            element.classList.add('selected-option');
+        }
+
+        function startTimer(duration) {
+            let timer = duration;
+            quizTimerInterval = setInterval(() => {
+                let minutes = parseInt(timer / 60, 10);
+                let seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                allDOMElements.quizTimer.textContent = `${minutes}:${seconds}`;
+                allDOMElements.progressBar.style.width = `${(timer / duration) * 100}%`;
+
+                if (--timer < 0) {
+                    clearInterval(quizTimerInterval);
+                    showConfirmationModal({ title: 'সময় শেষ!', message: 'আপনার সময় শেষ। কুইজটি স্বয়ংক্রিয়ভাবে জমা দেওয়া হবে।', okText: 'ঠিক আছে', cancelable: false, onConfirm: submitAndShowResult });
+                }
+            }, 1000);
+        }
+
+        async function submitAndShowResult() {
+            if (!quizInProgress) return;
+            quizInProgress = false;
+            clearInterval(quizTimerInterval);
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            const payload = {
+                quizId: currentQuizData.quizId,
+                studentRoll: userData.roll,
+                studentClass: userData.className,
+                answers: userAnswers
+            };
+            const result = await callApi('submitQuiz', payload);
+            if (result) {
+                lastResultId = result.data.resultId;
+                allDOMElements.finalScore.textContent = result.data.score;
+                allDOMElements.finalTotal.textContent = result.data.total;
+                showView('resultView');
+                renderResultChart(result.data.score, result.data.total);
+                allDOMElements.reviewAnswersBtn.style.display = websiteSettings.allowanswerreview ? 'block' : 'none';
+            }
+        }
+        
+        function renderResultChart(score, total) {
+            const ctx = allDOMElements.resultChartCanvas.getContext('2d');
+            if (resultChart) resultChart.destroy();
+            resultChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: { labels: ['সঠিক', 'ভুল'], datasets: [{ data: [score, total - score], backgroundColor: ['#22c55e', '#ef4444'], borderColor: [ 'var(--foreground)' ], borderWidth: 2 }] },
+                options: { responsive: true, cutout: '70%', plugins: { legend: { display: false } } }
+            });
+        }
+        
+        async function openAnswerReviewModal(resultId) {
+            const result = await callApi('getAnswerReviewDetails', { resultId });
+            if(result && result.data.length > 0) {
+                allDOMElements.answerReviewTitle.textContent = "উত্তর পর্যালোচনা";
+                allDOMElements.answerReviewContent.innerHTML = '';
+                result.data.forEach(q => {
+                    const isCorrect = q.iscorrect === true || String(q.iscorrect).toLowerCase() === 'true';
+                    const resultClass = isCorrect ? 'border-green-500' : 'border-red-500';
+                    const resultIcon = isCorrect ? '✔️' : '❌';
+
+                    allDOMElements.answerReviewContent.innerHTML += `
+                        <div class="p-4 border-l-4 ${resultClass} bg-slate-50 dark:bg-slate-800 rounded">
+                            <p class="font-bold">${q.questiontext}</p>
+                            <p class="text-sm mt-2">আপনার উত্তর: <span class="font-semibold">${q.submittedanswer}</span> ${resultIcon}</p>
+                            ${!isCorrect ? `<p class="text-sm text-green-600 dark:text-green-400">সঠিক উত্তর: <span class="font-semibold">${q.correctanswer}</span></p>` : ''}
+                            ${q.explanation ? `<p class="text-xs mt-1 italic text-slate-500">${q.explanation}</p>` : ''}
+                        </div>
+                    `;
+                });
+                allDOMElements.answerReviewModal.classList.remove('hidden');
+            } else {
+                showConfirmationModal({title: 'পাওয়া যায়নি', message: 'দুঃখিত, এই ফলাফলের বিস্তারিত পর্যালোচনা পাওয়া যায়নি।', okText: 'ঠিক আছে', cancelable: false});
+            }
+        }
+
+        // --- ADMIN: DASHBOARD & TABS ---
+        async function loadAdminDashboard() {
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            const result = await callApi('getAdminDashboardData', { role: userData.role });
+            if (result) {
+                adminDashboardCache = result.data;
+                renderAdminDashboardTab();
+                renderAdminTabs();
+            }
+        }
+        
+        function renderAdminTabs() {
+            const { quizzes, clubs, participants, allResults, admins, activityLog, settings } = adminDashboardCache;
+            renderQuizzesTab(quizzes, clubs);
+            renderClubsTab(clubs);
+            renderParticipantsTab(participants);
+            renderResultsTab(allResults);
+            
+            const userData = JSON.parse(sessionStorage.getItem('userData'));
+            if (userData.role === 'SuperAdmin') {
+                renderAdminsTab(admins);
+                renderActivityLogTab(activityLog);
+                renderSettingsTab(settings);
+            }
+        }
+        
+        function renderAdminDashboardTab() {
+            const { stats, quizzes, allResults } = adminDashboardCache;
+            const recentResults = allResults.slice(0, 5);
+
+            document.getElementById('tab-dashboard').innerHTML = `
+                <h1 class="text-3xl font-bold title-font mb-6">ড্যাশবোর্ড ওভারভিউ</h1>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="card !p-6 flex items-center gap-4"><div class="text-3xl p-3 bg-sky-100 dark:bg-sky-900 rounded-full">🎓</div><div><p class="text-slate-500">মোট শিক্ষার্থী</p><p class="text-3xl font-bold">${stats.students}</p></div></div>
+                    <div class="card !p-6 flex items-center gap-4"><div class="text-3xl p-3 bg-amber-100 dark:bg-amber-900 rounded-full">📝</div><div><p class="text-slate-500">মোট কুইজ</p><p class="text-3xl font-bold">${stats.quizzes}</p></div></div>
+                    <div class="card !p-6 flex items-center gap-4"><div class="text-3xl p-3 bg-green-100 dark:bg-green-900 rounded-full">🏆</div><div><p class="text-slate-500">মোট অংশগ্রহণ</p><p class="text-3xl font-bold">${stats.results}</p></div></div>
+                    <div class="card !p-6 flex items-center gap-4"><div class="text-3xl p-3 bg-indigo-100 dark:bg-indigo-900 rounded-full">🏛️</div><div><p class="text-slate-500">মোট ক্লাব</p><p class="text-3xl font-bold">${stats.clubs}</p></div></div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+                    <div class="lg:col-span-2 card">
+                        <h3 class="font-bold mb-4">সাম্প্রতিক ফলাফল</h3>
+                        <div class="table-wrapper !shadow-none !border">
+                            <table class="table-auto">
+                                <thead><tr><th>শিক্ষার্থী</th><th>কুইজ</th><th>স্কোর</th><th>তারিখ</th></tr></thead>
+                                <tbody>
+                                    ${recentResults.map(r => `
+                                        <tr>
+                                            <td>${r.StudentName}</td>
+                                            <td>${r.QuizTitle}</td>
+                                            <td class="font-bold">${r.score}</td>
+                                            <td>${new Date(r.timestamp).toLocaleDateString()}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-bold mb-4">কুইজের অবস্থা</h3>
+                        <canvas id="quizStatusChart"></canvas>
+                    </div>
+                </div>
+            `;
+            
+            const activeQuizzes = quizzes.filter(q => q.status === 'Active').length;
+            const pendingQuizzes = quizzes.filter(q => q.status === 'Pending').length;
+            const inactiveQuizzes = quizzes.length - activeQuizzes - pendingQuizzes;
+            
+            const ctx = document.getElementById('quizStatusChart').getContext('2d');
+            if(adminCharts.quizStatus) adminCharts.quizStatus.destroy();
+            adminCharts.quizStatus = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['সক্রিয়', 'পেন্ডিং', 'নিষ্ক্রিয়'],
+                    datasets: [{
+                        data: [activeQuizzes, pendingQuizzes, inactiveQuizzes],
+                        backgroundColor: ['#22c55e', '#f59e0b', '#64748b'],
+                        borderColor: 'var(--foreground)',
+                        borderWidth: 4
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+
+        function renderQuizzesTab(quizzes, clubs) {
+            const clubMap = clubs.reduce((map, club) => { map[club.clubid] = club.clubname; return map; }, {});
+            let content = `<h1 class="text-3xl font-bold title-font mb-6">কুইজ ম্যানেজমেন্ট</h1><button id="addQuizBtn" class="action-button !w-auto mb-6">নতুন কুইজ তৈরি করুন</button>`;
+            if (quizzes && quizzes.length > 0) {
+                content += `<div class="table-wrapper"><table class="table-auto"><thead><tr><th>শিরোনাম</th><th>ক্লাব</th><th>অবস্থা</th><th>প্রশ্ন</th><th>সময়</th><th>কার্যক্রম</th></tr></thead><tbody>`;
+                quizzes.forEach(q => {
+                    const statusColor = q.status === 'Active' ? 'bg-green-100 text-green-800' : q.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-slate-100 text-slate-800';
+                    content += `
+                        <tr>
+                            <td>${q.quiztitle}</td>
+                            <td>${clubMap[q.clubid] || 'N/A'}</td>
+                            <td><span class="px-2 py-1 text-xs font-semibold rounded-full ${statusColor}">${q.status}</span></td>
+                            <td>${q.totalquestions}</td>
+                            <td>${q.timelimitminutes} মিনিট</td>
+                            <td class="flex gap-2 flex-wrap">
+                                <button class="edit-quiz-btn action-button !text-xs !py-1 !px-2" data-quiz-id="${q.quizid}">এডিট</button>
+                                <button class="status-quiz-btn action-button !text-xs !py-1 !px-2 !bg-cyan-500" data-quiz-id="${q.quizid}" data-status="${q.status === 'Active' ? 'Inactive' : 'Active'}">${q.status === 'Active' ? 'নিষ্ক্রিয় করুন' : 'সক্রিয় করুন'}</button>
+                                <button class="delete-quiz-btn action-button !text-xs !py-1 !px-2 !bg-red-500" data-quiz-id="${q.quizid}">ডিলিট</button>
+                            </td>
+                        </tr>`;
+                });
+                content += `</tbody></table></div>`;
+            } else {
+                content += `<p class="text-center text-[var(--text-secondary)]">কোনো কুইজ পাওয়া যায়নি।</p>`;
+            }
+            document.getElementById('tab-manage-quizzes').innerHTML = content;
+        }
+
+        async function openQuizEditModal(quizId = null) {
+            let quizInfo = {}, questions = [];
+            if (quizId) {
+                const result = await callApi('getQuizForEdit', { quizId });
+                if (!result) return;
+                quizInfo = result.data.quizInfo;
+                questions = result.data.questions;
+            }
+            
+            allDOMElements.quizEditModalTitle.textContent = quizId ? 'কুইজ এডিট করুন' : 'নতুন কুইজ তৈরি করুন';
+            const clubOptions = adminDashboardCache.clubs.map(c => `<option value="${c.clubid}" ${quizInfo.clubid == c.clubid ? 'selected' : ''}>${c.clubname}</option>`).join('');
+
+            allDOMElements.quizEditForm.innerHTML = `
+                <input type="hidden" id="editQuizId" value="${quizId || ''}">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="editQuizTitle" class="input-field" placeholder="কুইজের শিরোনাম" value="${quizInfo.quiztitle || ''}" required>
+                    <input type="number" id="editQuizTime" class="input-field" placeholder="সময়সীমা (মিনিট)" value="${quizInfo.timelimitminutes || ''}" required>
+                    <select id="editQuizClub" class="input-field" required>${clubOptions}</select>
+                    <input type="text" id="editQuizClasses" class="input-field" placeholder="নির্ধারিত শ্রেণী (e.g., Class 7,Class 8 or all)" value="${quizInfo.assignedclasses || ''}" required>
+                </div>
+                <hr class="my-4"><h3 class="text-xl font-bold mb-4">প্রশ্নসমূহ</h3>
+                <div id="questions-editor" class="space-y-4 max-h-64 overflow-y-auto pr-2"></div>
+                <button type="button" id="addQuestionBtn" class="action-button !w-auto !bg-slate-500 mt-4">নতুন প্রশ্ন যোগ করুন</button>
+                <div class="flex justify-end gap-4 mt-6">
+                    <button type="button" class="action-button !w-auto !bg-slate-500" onclick="allDOMElements.quizEditModal.classList.add('hidden')"> বাতিল </button>
+                    <button type="submit" class="action-button !w-auto">সেভ করুন</button>
+                </div>
+            `;
+
+            const renderQuestionEditor = (q = {}) => `
+                <div class="question-item p-4 border rounded-lg bg-slate-50 dark:bg-slate-800 relative">
+                    <button type="button" class="remove-question-btn absolute -top-2 -right-2 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs">&times;</button>
+                    <textarea class="input-field question-text" placeholder="প্রশ্নের বিবরণ" required>${q.questiontext || ''}</textarea>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" class="input-field option-a" placeholder="অপশন A" value="${q.optiona || ''}" required>
+                        <input type="text" class="input-field option-b" placeholder="অপশন B" value="${q.optionb || ''}" required>
+                        <input type="text" class="input-field option-c" placeholder="অপশন C" value="${q.optionc || ''}" required>
+                        <input type="text" class="input-field option-d" placeholder="অপশন D" value="${q.optiond || ''}" required>
+                    </div>
+                    <select class="input-field correct-answer" required>
+                        <option value="A" ${q.correctanswer === 'A' ? 'selected':''}>সঠিক: A</option><option value="B" ${q.correctanswer === 'B' ? 'selected':''}>সঠিক: B</option>
+                        <option value="C" ${q.correctanswer === 'C' ? 'selected':''}>সঠিক: C</option><option value="D" ${q.correctanswer === 'D' ? 'selected':''}>সঠিক: D</option>
+                    </select>
+                    <textarea class="input-field explanation" placeholder="ব্যাখ্যা (ঐচ্ছিক)">${q.explanation || ''}</textarea>
+                </div>`;
+            
+            const questionsEditor = document.getElementById('questions-editor');
+            questions.forEach(q => questionsEditor.innerHTML += renderQuestionEditor(q));
+            if (questions.length === 0) questionsEditor.innerHTML += renderQuestionEditor();
+            
+            document.getElementById('addQuestionBtn').onclick = () => questionsEditor.insertAdjacentHTML('beforeend', renderQuestionEditor());
+            allDOMElements.quizEditModal.classList.remove('hidden');
+        }
+
+        async function saveQuiz(e) {
+            e.preventDefault();
+            const quizId = document.getElementById('editQuizId').value;
+            const quizData = {
+                title: document.getElementById('editQuizTitle').value, timeLimit: document.getElementById('editQuizTime').value,
+                clubId: document.getElementById('editQuizClub').value, assignedClasses: document.getElementById('editQuizClasses').value,
+            };
+            const questions = Array.from(document.querySelectorAll('.question-item')).map(item => ({
+                text: item.querySelector('.question-text').value, optA: item.querySelector('.option-a').value,
+                optB: item.querySelector('.option-b').value, optC: item.querySelector('.option-c').value,
+                optD: item.querySelector('.option-d').value, correct: item.querySelector('.correct-answer').value,
+                explanation: item.querySelector('.explanation').value,
+            }));
+            
+            if (quizId) {
+                await callApi('updateQuiz', { quizId, quizData, questions });
+            } else {
+                const newQuizResult = await callApi('createNewQuiz', {title: quizData.title, clubId: quizData.clubId, timeLimit: quizData.timeLimit, assignedClasses: quizData.assignedClasses});
+                if(newQuizResult) await callApi('updateQuiz', {quizId: newQuizResult.data.quizId, quizData, questions});
+            }
+            allDOMElements.quizEditModal.classList.add('hidden');
+            loadAdminDashboard();
+        }
+
+        async function updateQuizStatus(quizId, status) {
+            showConfirmationModal({
+                title: 'অবস্থা পরিবর্তন নিশ্চিত করুন', message: `আপনি কি কুইজের অবস্থা পরিবর্তন করে "${status}" করতে চান?`,
+                onConfirm: async () => { await callApi('updateQuizStatus', { quizId, status }); loadAdminDashboard(); }
+            });
+        }
+
+        function deleteQuiz(quizId) {
+            showConfirmationModal({
+                title: 'ডিলিট নিশ্চিত করুন', message: 'আপনি কি এই কুইজ এবং এর সাথে সম্পর্কিত সমস্ত প্রশ্ন মুছে ফেলতে চান? এই কাজটি আর ফেরানো যাবে না।',
+                onConfirm: async () => { await callApi('deleteQuiz', { quizId }); loadAdminDashboard(); }
+            });
+        }
+        
+        function renderClubsTab(clubs) {
+            let content = `<h1 class="text-3xl font-bold title-font mb-6">ক্লাব ম্যানেজমেন্ট</h1><button id="addClubBtn" class="action-button !w-auto mb-6">নতুন ক্লাব যোগ করুন</button>`;
+            if (clubs && clubs.length > 0) {
+                content += `<div class="table-wrapper"><table class="table-auto"><thead><tr><th>লোগো</th><th>নাম</th><th>ক্লাব আইডি</th><th>কার্যক্রম</th></tr></thead><tbody>`;
+                clubs.forEach(c => {
+                    content += `
+                        <tr>
+                            <td><img src="${c.clublogourl || 'https://placehold.co/40x40/3b82f6/ffffff?text=C'}" alt="${c.clubname}" class="w-10 h-10 rounded-full object-cover"></td>
+                            <td>${c.clubname}</td>
+                            <td>${c.clubid}</td>
+                            <td class="flex gap-2"><button class="edit-club-btn action-button !text-xs !py-1 !px-2" data-club='${JSON.stringify(c)}'>এডিট</button><button class="delete-club-btn action-button !text-xs !py-1 !px-2 !bg-red-500" data-club-id="${c.clubid}">ডিলিট</button></td>
+                        </tr>`;
+                });
+                content += `</tbody></table></div>`;
+            } else { content += `<p>কোনো ক্লাব পাওয়া যায়নি।</p>`; }
+            document.getElementById('tab-manage-clubs').innerHTML = content;
+        }
+        
+        function openClubModal(club = null) {
+            allDOMElements.clubForm.reset();
+            allDOMElements.clubId.value = '';
+            if (club) {
+                allDOMElements.clubModalTitle.textContent = 'ক্লাব এডিট করুন';
+                allDOMElements.clubId.value = club.clubid;
+                allDOMElements.clubName.value = club.clubname;
+                allDOMElements.clubLogo.value = club.clublogourl;
+            } else {
+                allDOMElements.clubModalTitle.textContent = 'নতুন ক্লাব যোগ করুন';
+            }
+            allDOMElements.clubModal.classList.remove('hidden');
+        }
+
+        async function saveClub(e) {
+            e.preventDefault();
+            const clubId = allDOMElements.clubId.value;
+            const payload = { clubName: allDOMElements.clubName.value, clubLogo: allDOMElements.clubLogo.value };
+            if (clubId) {
+                payload.clubId = clubId;
+                await callApi('updateClub', payload);
+            } else {
+                await callApi('addClub', payload);
+            }
+            allDOMElements.clubModal.classList.add('hidden');
+            loadAdminDashboard();
+        }
+
+        function deleteClub(clubId) {
+            showConfirmationModal({ title: 'ডিলিট নিশ্চিত করুন', message: 'আপনি কি এই ক্লাবটি মুছে ফেলতে চান?', onConfirm: async () => { await callApi('deleteClub', { clubId }); loadAdminDashboard(); } });
+        }
+
+        function renderParticipantsTab(participants) {
+            const uniqueClasses = [...new Set(participants.map(p => p.Class))].sort();
+            let classOptions = uniqueClasses.map(c => `<option value="${c}">${c}</option>`).join('');
+
+            let content = `
+                <h1 class="text-3xl font-bold title-font mb-6">অংশগ্রহণকারী ম্যানেজমেন্ট</h1>
+                <div class="flex justify-between items-center mb-6">
+                    <button id="addParticipantBtn" class="action-button !w-auto">নতুন অংশগ্রহণকারী</button>
+                    <div class="flex items-center gap-2">
+                        <label for="classFilter" class="font-semibold">শ্রেণী অনুযায়ী ফিল্টার:</label>
+                        <select id="classFilter" class="input-field !w-auto">
+                            <option value="">সকল শ্রেণী</option>
+                            ${classOptions}
+                        </select>
+                    </div>
+                </div>
+                <div id="participantsTableContainer"></div>
+            `;
+            document.getElementById('tab-manage-participants').innerHTML = content;
+            
+            document.getElementById('classFilter').addEventListener('change', (e) => {
+                const selectedClass = e.target.value;
+                const filteredParticipants = selectedClass ? participants.filter(p => p.Class === selectedClass) : participants;
+                renderParticipantsTable(filteredParticipants);
+            });
+            
+            renderParticipantsTable(participants);
+        }
+        
+        function renderParticipantsTable(participants) {
+            const container = document.getElementById('participantsTableContainer');
+            let content = '';
+            if (participants && participants.length > 0) {
+                content += `<div class="table-wrapper"><table class="table-auto"><thead><tr><th>শ্রেণী</th><th>রোল</th><th>নাম</th><th>পিন</th><th>কার্যক্রম</th></tr></thead><tbody>`;
+                participants.forEach(p => {
+                    content += `
+                        <tr>
+                            <td>${p.Class}</td><td>${p.roll}</td><td>${p.name}</td><td>${p.pin}</td>
+                            <td class="flex gap-2"><button class="edit-participant-btn action-button !text-xs !py-1 !px-2" data-participant='${JSON.stringify(p)}'>এডিট</button><button class="delete-participant-btn action-button !text-xs !py-1 !px-2 !bg-red-500" data-roll="${p.roll}" data-class="${p.Class}">ডিলিট</button></td>
+                        </tr>`;
+                });
+                content += `</tbody></table></div>`;
+            } else { content += `<div class="card text-center"><p>এই ফিল্টারে কোনো অংশগ্রহণকারী পাওয়া যায়নি।</p></div>`; }
+            container.innerHTML = content;
+        }
+
+
+        function openParticipantModal(p = null) {
+            allDOMElements.participantForm.reset();
+            allDOMElements.originalRoll.value = '';
+            if (p) {
+                allDOMElements.participantModalTitle.textContent = 'অংশগ্রহণকারী এডিট করুন';
+                allDOMElements.originalRoll.value = p.roll;
+                allDOMElements.participantClass.value = p.Class;
+                allDOMElements.participantRoll.value = p.roll;
+                allDOMElements.participantName.value = p.name;
+                allDOMElements.participantPin.value = p.pin;
+            } else {
+                allDOMElements.participantModalTitle.textContent = 'নতুন অংশগ্রহণকারী যোগ করুন';
+            }
+            allDOMElements.participantModal.classList.remove('hidden');
+        }
+
+        async function saveParticipant(e) {
+            e.preventDefault();
+            const originalRoll = allDOMElements.originalRoll.value;
+            const payload = {
+                participantClass: allDOMElements.participantClass.value, participantRoll: allDOMElements.participantRoll.value,
+                participantName: allDOMElements.participantName.value, participantPin: allDOMElements.participantPin.value
+            };
+            if (originalRoll) {
+                payload.originalRoll = originalRoll;
+                await callApi('updateParticipant', payload);
+            } else {
+                await callApi('addParticipant', payload);
+            }
+            allDOMElements.participantModal.classList.add('hidden');
+            loadAdminDashboard();
+        }
+
+        function deleteParticipant(roll, pClass) {
+            showConfirmationModal({ title: 'ডিলিট নিশ্চিত করুন', message: `আপনি কি ${pClass} থেকে ${roll} রোল মুছে ফেলতে চান?`, onConfirm: async () => { await callApi('deleteParticipant', { participantRoll: roll, participantClass: pClass }); loadAdminDashboard(); } });
+        }
+
+        function renderResultsTab(allResults) {
+            let content = `<h1 class="text-3xl font-bold title-font mb-6">ফলাফল ড্যাশবোর্ড</h1>`;
+            const quizzes = adminDashboardCache.quizzes;
+            if (quizzes && quizzes.length > 0) {
+                const quizOptions = quizzes.map(q => `<option value="${q.quizid}">${q.quiztitle}</option>`).join('');
+                content += `
+                    <div class="mb-6">
+                        <label for="quizResultFilter" class="block mb-2 text-sm font-medium">একটি কুইজ নির্বাচন করুন:</label>
+                        <select id="quizResultFilter" class="input-field">
+                            <option value="">-- সকল কুইজ --</option>
+                            ${quizOptions}
+                        </select>
+                    </div>
+                    <div id="quiz-dashboard-content"></div>
+                `;
+            } else {
+                content += `<p>ফলাফল দেখানোর জন্য কোনো কুইজ পাওয়া যায়নি।</p>`;
+            }
+            document.getElementById('tab-view-results').innerHTML = content;
+            
+            displayQuizResultsDashboard('');
+
+            document.getElementById('quizResultFilter').addEventListener('change', (e) => {
+                displayQuizResultsDashboard(e.target.value);
+            });
+        }
+
+        function displayQuizResultsDashboard(quizId) {
+            const container = document.getElementById('quiz-dashboard-content');
+            const { allResults } = adminDashboardCache;
+            
+            const filteredResults = quizId ? allResults.filter(r => r.quizid == quizId) : allResults;
+
+            if (filteredResults.length === 0) {
+                container.innerHTML = `<div class="card text-center"><p>এই কুইজের জন্য কোনো ফলাফল পাওয়া যায়নি।</p></div>`;
+                return;
+            }
+            
+            let totalScore = 0, highScore = 0;
+            let lowScore = filteredResults.length > 0 ? Number(filteredResults[0].score) : 0;
+            
+            filteredResults.forEach(r => {
+                const score = Number(r.score);
+                totalScore += score;
+                if (score > highScore) highScore = score;
+                if (score < lowScore) lowScore = score;
+            });
+            const avgScore = (totalScore / filteredResults.length).toFixed(2);
+
+            filteredResults.sort((a, b) => Number(b.score) - Number(a.score));
+
+            let content = `
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="card !p-6 text-center"><p class="text-slate-500">অংশগ্রহণকারী</p><p class="text-3xl font-bold">${filteredResults.length}</p></div>
+                    <div class="card !p-6 text-center"><p class="text-slate-500">গড় স্কোর</p><p class="text-3xl font-bold">${avgScore}</p></div>
+                    <div class="card !p-6 text-center"><p class="text-slate-500">সর্বোচ্চ স্কোর</p><p class="text-3xl font-bold">${highScore}</p></div>
+                    <div class="card !p-6 text-center"><p class="text-slate-500">সর্বনিম্ন স্কোর</p><p class="text-3xl font-bold">${lowScore}</p></div>
+                </div>
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold title-font">লিডারবোর্ড</h2>
+                    <div>
+                        ${quizId ? `<button class="view-analysis-btn action-button !w-auto mr-2" data-quiz-id="${quizId}">বিশ্লেষণ দেখুন</button>` : ''}
+                        ${quizId ? `<button class="download-results-btn action-button !w-auto !bg-green-500" data-quiz-id="${quizId}">ডাউনলোড</button>` : ''}
+                    </div>
+                </div>
+                <div class="table-wrapper"><table class="table-auto"><thead><tr><th>র‍্যাঙ্ক</th><th>শিক্ষার্থী</th><th>শ্রেণী</th><th>রোল</th><th>স্কোর</th><th>কার্যক্রম</th></tr></thead><tbody>`;
+            filteredResults.forEach((r, index) => {
+                content += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${r.StudentName}</td>
+                        <td>${r.studentclass}</td>
+                        <td>${r.studentroll}</td>
+                        <td><span class="font-bold text-lg">${r.score}</span></td>
+                        <td><button class="admin-review-btn action-button !w-auto !text-xs !py-1 !px-2" data-result-id="${r.resultid}">উত্তর দেখুন</button></td>
+                    </tr>`;
+            });
+            content += `</tbody></table></div>`;
+            container.innerHTML = content;
+        }
+        
+        async function openQuizAnalysisModal(quizId) {
+            const result = await callApi('getQuizResultAnalysis', { quizId });
+            if(result && result.data) {
+                const { summary, questionAnalysis } = result.data;
+                const quiz = adminDashboardCache.quizzes.find(q => q.quizid == quizId);
+                
+                if (!quiz) {
+                    showConfirmationModal({title: 'ত্রুটি', message: 'বিশ্লেষণের জন্য কুইজের বিবরণ পাওয়া যায়নি।', okText: 'ঠিক আছে', cancelable: false});
+                    return;
+                }
+
+                allDOMElements.quizAnalysisTitle.textContent = `"${quiz.quiztitle}" কুইজের বিশ্লেষণ`;
+
+                let content = `
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 text-center">
+                        <div class="card !p-4"><p class="text-sm text-slate-500">অংশগ্রহণকারী</p><p class="text-2xl font-bold">${summary.participants}</p></div>
+                        <div class="card !p-4"><p class="text-sm text-slate-500">গড় স্কোর</p><p class="text-2xl font-bold">${summary.avgScore}</p></div>
+                        <div class="card !p-4"><p class="text-sm text-slate-500">সর্বোচ্চ স্কোর</p><p class="text-2xl font-bold">${summary.highScore}</p></div>
+                        <div class="card !p-4"><p class="text-sm text-slate-500">সর্বনিম্ন স্কোর</p><p class="text-2xl font-bold">${summary.lowScore}</p></div>
+                    </div>
+                    <div class="table-wrapper"><table class="table-auto">
+                        <thead><tr><th>প্রশ্ন</th><th>সঠিক</th><th>ভুল</th><th>উত্তর দেয়নি</th><th>সঠিকতার হার</th></tr></thead>
+                        <tbody>`;
+                
+                questionAnalysis.forEach(q => {
+                    const accuracy = (q.correct + q.incorrect) > 0 ? ((q.correct / (q.correct + q.incorrect)) * 100).toFixed(1) : 0;
+                    const accuracyColor = accuracy > 70 ? 'text-green-600' : accuracy > 40 ? 'text-yellow-600' : 'text-red-600';
+                    content += `
+                        <tr>
+                            <td class="text-sm">${q.questionText}</td>
+                            <td>${q.correct}</td>
+                            <td>${q.incorrect}</td>
+                            <td>${q.notanswered}</td>
+                            <td class="font-bold ${accuracyColor}">${accuracy}%</td>
+                        </tr>
+                    `;
+                });
+
+                content += `</tbody></table></div>`;
+                allDOMElements.quizAnalysisContent.innerHTML = content;
+                allDOMElements.quizAnalysisModal.classList.remove('hidden');
+            }
+        }
+        
+        function renderAdminsTab(admins) {
+            let content = `<h1 class="text-3xl font-bold title-font mb-6">অ্যাডমিন ম্যানেজমেন্ট</h1><button id="addAdminBtn" class="action-button !w-auto mb-6">নতুন অ্যাডমিন</button>`;
+            if (admins && admins.length > 0) {
+                content += `<div class="table-wrapper"><table class="table-auto"><thead><tr><th>অ্যাডমিন আইডি</th><th>নাম</th><th>ভূমিকা</th><th>নির্ধারিত শ্রেণী</th><th>কার্যক্রম</th></tr></thead><tbody>`;
+                admins.forEach(a => {
+                    content += `
+                        <tr><td>${a.adminid}</td><td>${a.name}</td><td>${a.role}</td><td>${a.assignedclasses || 'All'}</td>
+                        <td class="flex gap-2"><button class="edit-admin-btn action-button !text-xs !py-1 !px-2" data-admin='${JSON.stringify(a)}'>এডিট</button><button class="delete-admin-btn action-button !text-xs !py-1 !px-2 !bg-red-500" data-admin-id="${a.adminid}">ডিলিট</button></td></tr>`;
+                });
+                content += `</tbody></table></div>`;
+            } else { content += `<p>কোনো অ্যাডমিন পাওয়া যায়নি।</p>`; }
+            document.getElementById('tab-manage-admins').innerHTML = content;
+        }
+
+        function openAdminModal(admin = null) {
+            allDOMElements.adminForm.reset();
+            allDOMElements.originalAdminId.value = '';
+            allDOMElements.formAdminPassword.placeholder = "পাসওয়ার্ড";
+            if (admin) {
+                allDOMElements.adminModalTitle.textContent = 'অ্যাডমিন এডিট করুন';
+                allDOMElements.originalAdminId.value = admin.adminid;
+                allDOMElements.formAdminId.value = admin.adminid;
+                allDOMElements.formAdminName.value = admin.name;
+                allDOMElements.formAdminRole.value = admin.role;
+                allDOMElements.formAdminClasses.value = admin.assignedclasses || '';
+                allDOMElements.formAdminPassword.placeholder = "পরিবর্তন না করতে চাইলে খালি রাখুন";
+            } else {
+                allDOMElements.adminModalTitle.textContent = 'নতুন অ্যাডমিন যোগ করুন';
+            }
+            allDOMElements.adminModal.classList.remove('hidden');
+        }
+
+        async function saveAdmin(e) {
+            e.preventDefault();
+            const originalAdminId = allDOMElements.originalAdminId.value;
+            const payload = {
+                adminId: allDOMElements.formAdminId.value, name: allDOMElements.formAdminName.value,
+                password: allDOMElements.formAdminPassword.value, role: allDOMElements.formAdminRole.value,
+                assignedClasses: allDOMElements.formAdminClasses.value
+            };
+            if (originalAdminId) {
+                payload.originalAdminId = originalAdminId;
+                await callApi('updateAdmin', payload);
+            } else {
+                await callApi('addAdmin', payload);
+            }
+            allDOMElements.adminModal.classList.add('hidden');
+            loadAdminDashboard();
+        }
+
+        function deleteAdmin(adminId) {
+            showConfirmationModal({ title: 'ডিলিট নিশ্চিত করুন', message: `আপনি কি "${adminId}" অ্যাডমিনকে মুছে ফেলতে চান?`, onConfirm: async () => { await callApi('deleteAdmin', { adminId }); loadAdminDashboard(); } });
+        }
+
+        function renderActivityLogTab(log) {
+            let content = `<h1 class="text-3xl font-bold title-font mb-6">অ্যাক্টিভিটি লগ</h1>`;
+            if (log && log.length > 0) {
+                content += `<div class="table-wrapper"><table class="table-auto"><thead><tr><th>সময়</th><th>অ্যাডমিন</th><th>কার্যক্রম</th><th>বিবরণ</th></tr></thead><tbody>`;
+                log.forEach(l => {
+                    content += `<tr><td>${new Date(l.timestamp).toLocaleString()}</td><td>${l.adminname} (${l.adminid})</td><td>${l.action}</td><td class="text-xs">${l.details}</td></tr>`;
+                });
+                content += `</tbody></table></div>`;
+            } else { content += `<p>কোনো কার্যক্রম রেকর্ড করা হয়নি।</p>`; }
+            document.getElementById('tab-activity-log').innerHTML = content;
+        }
+
+        function renderSettingsTab(settings) {
+            document.getElementById('tab-website-settings').innerHTML = `
+                <h1 class="text-3xl font-bold title-font mb-6">ওয়েবসাইট সেটিংস</h1>
+                <form id="settingsForm" class="card space-y-6">
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">সাধারণ সেটিংস</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" name="portalTitle" class="input-field" placeholder="পোর্টালের শিরোনাম" value="${settings.portaltitle || ''}">
+                            <input type="text" name="portalAnnouncement" class="input-field" placeholder="পোর্টালের ঘোষণা" value="${settings.portalannouncement || ''}">
+                            <input type="text" name="schoolLogoURL" class="input-field" placeholder="স্কুলের লোগো URL" value="${settings.schoollogourl || ''}">
+                            <input type="color" name="themeColorPrimary" class="input-field !p-1" value="${settings.themecolorprimary || '#3b82f6'}">
+                            <textarea name="loginPageMessage" class="input-field md:col-span-2" placeholder="লগইন পেজের বার্তা">${settings.loginpagemessage || ''}</textarea>
+                            <textarea name="dashboardWelcomeMessage" class="input-field md:col-span-2" placeholder="ড্যাশবোর্ডের স্বাগত বার্তা">${settings.dashboardwelcomemessage || ''}</textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">কুইজের নিয়মাবলী</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-center gap-2"><input type="checkbox" id="allowAnswerReview" name="allowAnswerReview" ${settings.allowanswerreview ? 'checked' : ''}><label for="allowAnswerReview">শিক্ষার্থীদের উত্তর পর্যালোচনা করার অনুমতি দিন</label></div>
+                            <div class="flex items-center gap-2"><input type="checkbox" id="allowMultipleAttempts" name="allowMultipleAttempts" ${settings.allowmultipleattempts ? 'checked' : ''}><label for="allowMultipleAttempts">একাধিকবার অংশগ্রহণের অনুমতি দিন</label></div>
+                            <div class="flex items-center gap-2 opacity-50"><input type="number" class="input-field !w-24" disabled><label>প্রতি প্রশ্নের জন্য সময় (শীঘ্রই আসছে)</label></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="action-button">সেটিংস সেভ করুন</button>
+                </form>
+            `;
+        }
+
+        async function saveSettings(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const payload = {};
+            for (let [key, value] of formData.entries()) {
+                payload[key] = value;
+            }
+            ['allowAnswerReview', 'allowMultipleAttempts'].forEach(key => {
+                const el = e.target.querySelector(`[name=${key}]`);
+                if (el) payload[key] = el.checked;
+            });
+            await callApi('updateWebsiteSettings', payload);
+            showConfirmationModal({title: 'সফল', message: 'সেটিংস সফলভাবে আপডেট করা হয়েছে!', okText: 'ঠিক আছে', cancelable: false});
+            loadAdminDashboard();
+        }
+        
+        function downloadQuizResults(quizId) {
+            const { allResults, quizzes } = adminDashboardCache;
+            const quiz = quizzes.find(q => q.quizid == quizId);
+            const quizTitle = quiz ? quiz.quiztitle.replace(/[^a-z0-9]/gi, '_') : 'Results';
+
+            const filteredResults = allResults
+                .filter(r => r.quizid == quizId)
+                .sort((a, b) => Number(b.score) - Number(a.score));
+
+            let csvContent = "data:text/csv;charset=utf-8,";
+            const headers = ["Rank", "Student Name", "Class", "Roll", "Score"];
+            csvContent += headers.join(",") + "\r\n";
+
+            filteredResults.forEach((r, index) => {
+                const row = [
+                    index + 1,
+                    `"${r.StudentName.replace(/"/g, '""')}"`,
+                    r.studentclass,
+                    r.studentroll,
+                    r.score
+                ];
+                csvContent += row.join(",") + "\r\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `${quizTitle}_Results.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // --- EVENT LISTENERS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            checkSession();
+            allDOMElements.hamburgerMenu.addEventListener('click', () => {
+                allDOMElements.adminSidebar.classList.toggle('open');
+            });
+        });
+        
+        if (allDOMElements['theme-toggle']) {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                allDOMElements['theme-toggle'].checked = true;
+            }
+            allDOMElements['theme-toggle'].addEventListener('change', function() {
+                document.documentElement.classList.toggle('dark', this.checked);
+                localStorage.setItem('theme', this.checked ? 'dark' : 'light');
+            });
+        }
+
+        allDOMElements.logoutButton.addEventListener('click', () => { sessionStorage.clear(); window.location.reload(); });
+        allDOMElements.studentLoginForm.addEventListener('submit', async e => {
+            e.preventDefault();
+            allDOMElements.loginError.classList.add('hidden');
+            const payload = { className: allDOMElements.studentClass.value, roll: allDOMElements.studentRoll.value.trim(), pin: allDOMElements.studentPin.value.trim() };
+            const result = await callApi('studentLogin', payload);
+            if (result) { sessionStorage.setItem('userType', 'student'); sessionStorage.setItem('userData', JSON.stringify(result.data)); checkSession(); }
+        });
+        allDOMElements.adminLoginButton.addEventListener('click', () => allDOMElements.adminLoginModal.classList.remove('hidden'));
+        allDOMElements.closeAdminModal.addEventListener('click', () => allDOMElements.adminLoginModal.classList.add('hidden'));
+        allDOMElements.adminLoginForm.addEventListener('submit', async e => {
+            e.preventDefault();
+            allDOMElements.adminLoginError.classList.add('hidden');
+            const payload = { adminId: allDOMElements.adminId.value.trim(), password: allDOMElements.adminPassword.value.trim() };
+            const result = await callApi('adminLogin', payload);
+            if (result) { 
+                result.data.id = allDOMElements.adminId.value.trim();
+                sessionStorage.setItem('userType', 'admin'); 
+                sessionStorage.setItem('userData', JSON.stringify(result.data)); 
+                allDOMElements.adminLoginModal.classList.add('hidden'); 
+                checkSession(); 
+            }
+        });
+        
+        allDOMElements.nextQuestionBtn.addEventListener('click', () => { if(currentQuestionIndex < currentQuizData.questions.length - 1) { currentQuestionIndex++; renderQuestion(); } });
+        allDOMElements.prevQuestionBtn.addEventListener('click', () => { if(currentQuestionIndex > 0) { currentQuestionIndex--; renderQuestion(); } });
+        allDOMElements.submitQuizBtn.addEventListener('click', () => {
+            const unanswered = currentQuizData.questions.filter(q => !userAnswers.hasOwnProperty(q.QuestionID)).length;
+            if (unanswered > 0) {
+                showConfirmationModal({ title: 'উত্তর না দেওয়া প্রশ্ন', message: `আপনি ${unanswered} টি প্রশ্নের উত্তর দেননি। আপনি কি জমা দিতে চান?`, onConfirm: submitAndShowResult });
+            } else {
+                submitAndShowResult();
+            }
+        });
+        
+        allDOMElements.backToDashboardBtn.addEventListener('click', checkSession);
+        allDOMElements.reviewAnswersBtn.addEventListener('click', () => openAnswerReviewModal(lastResultId));
+        allDOMElements.closeAnswerReviewModal.addEventListener('click', () => allDOMElements.answerReviewModal.classList.add('hidden'));
+        allDOMElements.closeQuizAnalysisModal.addEventListener('click', () => allDOMElements.quizAnalysisModal.classList.add('hidden'));
+        
+        document.querySelector('#adminSidebar nav').addEventListener('click', e => {
+            if (e.target.closest('.sidebar-link')) {
+                e.preventDefault();
+                const link = e.target.closest('.sidebar-link');
+                const tab = link.dataset.tab;
+                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                document.querySelectorAll('.admin-tab-content').forEach(content => content.classList.add('hidden'));
+                document.getElementById(`tab-${tab}`).classList.remove('hidden');
+                
+                if (window.innerWidth < 768) {
+                    allDOMElements.adminSidebar.classList.remove('open');
+                }
+            }
+        });
+
+        document.getElementById('studentDashboardContent').addEventListener('click', e => {
+            const reviewBtn = e.target.closest('.student-review-btn');
+            if (reviewBtn) {
+                openAnswerReviewModal(reviewBtn.dataset.resultId);
+            }
+        });
+
+        document.querySelector('.admin-main-content').addEventListener('click', e => {
+            const addQuizBtn = e.target.closest('#addQuizBtn');
+            const editQuizBtn = e.target.closest('.edit-quiz-btn');
+            const statusQuizBtn = e.target.closest('.status-quiz-btn');
+            const deleteQuizBtn = e.target.closest('.delete-quiz-btn');
+            const removeQuestionBtn = e.target.closest('.remove-question-btn');
+            const addClubBtn = e.target.closest('#addClubBtn');
+            const editClubBtn = e.target.closest('.edit-club-btn');
+            const deleteClubBtn = e.target.closest('.delete-club-btn');
+            const addParticipantBtn = e.target.closest('#addParticipantBtn');
+            const editParticipantBtn = e.target.closest('.edit-participant-btn');
+            const deleteParticipantBtn = e.target.closest('.delete-participant-btn');
+            const addAdminBtn = e.target.closest('#addAdminBtn');
+            const editAdminBtn = e.target.closest('.edit-admin-btn');
+            const deleteAdminBtn = e.target.closest('.delete-admin-btn');
+            const analysisBtn = e.target.closest('.view-analysis-btn');
+            const adminReviewBtn = e.target.closest('.admin-review-btn');
+            const downloadBtn = e.target.closest('.download-results-btn');
+
+            if (addQuizBtn) openQuizEditModal();
+            else if (editQuizBtn) openQuizEditModal(editQuizBtn.dataset.quizId);
+            else if (statusQuizBtn) updateQuizStatus(statusQuizBtn.dataset.quizId, statusQuizBtn.dataset.status);
+            else if (deleteQuizBtn) deleteQuiz(deleteQuizBtn.dataset.quizId);
+            else if (removeQuestionBtn) removeQuestionBtn.closest('.question-item').remove();
+            else if (addClubBtn) openClubModal();
+            else if (editClubBtn) openClubModal(JSON.parse(editClubBtn.dataset.club));
+            else if (deleteClubBtn) deleteClub(deleteClubBtn.dataset.clubId);
+            else if (addParticipantBtn) openParticipantModal();
+            else if (editParticipantBtn) openParticipantModal(JSON.parse(editParticipantBtn.dataset.participant));
+            else if (deleteParticipantBtn) deleteParticipant(deleteParticipantBtn.dataset.roll, deleteParticipantBtn.dataset.class);
+            else if (addAdminBtn) openAdminModal();
+            else if (editAdminBtn) openAdminModal(JSON.parse(editAdminBtn.dataset.admin));
+            else if (deleteAdminBtn) deleteAdmin(deleteAdminBtn.dataset.adminId);
+            else if (analysisBtn) openQuizAnalysisModal(analysisBtn.dataset.quizId);
+            else if (adminReviewBtn) openAnswerReviewModal(adminReviewBtn.dataset.resultId);
+            else if (downloadBtn) downloadQuizResults(downloadBtn.dataset.quizId);
+        });
+
+        allDOMElements.activeQuizzesTabBtn.addEventListener('click', () => {
+            allDOMElements.activeQuizzesContent.classList.remove('hidden');
+            allDOMElements.myResultsContent.classList.add('hidden');
+            allDOMElements.activeQuizzesTabBtn.classList.add('active');
+            allDOMElements.myResultsTabBtn.classList.remove('active');
+        });
+        allDOMElements.myResultsTabBtn.addEventListener('click', () => {
+            allDOMElements.activeQuizzesContent.classList.add('hidden');
+            allDOMElements.myResultsContent.classList.remove('hidden');
+            allDOMElements.activeQuizzesTabBtn.classList.remove('active');
+            allDOMElements.myResultsTabBtn.classList.add('active');
+        });
+
+        allDOMElements.quizEditForm.addEventListener('submit', saveQuiz);
+        allDOMElements.closeQuizEditModal.addEventListener('click', () => allDOMElements.quizEditModal.classList.add('hidden'));
+        allDOMElements.clubForm.addEventListener('submit', saveClub);
+        allDOMElements.closeClubModalBtn.addEventListener('click', () => allDOMElements.clubModal.classList.add('hidden'));
+        allDOMElements.participantForm.addEventListener('submit', saveParticipant);
+        allDOMElements.closeParticipantModalBtn.addEventListener('click', () => allDOMElements.participantModal.classList.add('hidden'));
+        allDOMElements.adminForm.addEventListener('submit', saveAdmin);
+        allDOMElements.closeAdminModalBtn.addEventListener('click', () => allDOMElements.adminModal.classList.add('hidden'));
+        document.addEventListener('submit', e => { if (e.target.id === 'settingsForm') saveSettings(e); });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && quizInProgress) {
+                submitAndShowResult();
+                showConfirmationModal({ 
+                    title: 'কুইজ জমা দেওয়া হয়েছে', 
+                    message: 'আপনি কুইজ চলাকালীন ট্যাব পরিবর্তন করায় নিয়ম অনুযায়ী আপনার কুইজটি স্বয়ংক্রিয়ভাবে জমা দেওয়া হয়েছে।', 
+                    okText: 'ঠিক আছে', 
+                    cancelable: false 
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>
